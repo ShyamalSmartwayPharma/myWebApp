@@ -27,14 +27,14 @@ jobs:
         run: dotnet test --no-build --verbosity normal
       - name: Check Dockerfile
         run: |
-           echo "Current directory:"
-           pwd
+           Write-Host "Current directory:"
+           Get-Location
 
-           echo "Files in current directory:"
-           ls -la
+           Write-Host "Files in current directory:"
+           Get-ChildItem -Force
 
-           echo "Searching for Dockerfile:"
-           find . -type f -name "Dockerfile" -print  
+           Write-Host "Searching for Dockerfile:"
+           Get-ChildItem -Path . -Filter Dockerfile -Recurse -File 
       - name: Build and Push Docker Image
         uses: mr-smithers-excellent/docker-build-push@v7
         with:
